@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Mini Low-Code Admin</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">Mini Low-Code CRUD + RBAC</div>
+      <div class="login">
+        <input id="username" placeholder="username (alice,bob,carol)" />
+        <button id="login" class="btn primary">Login</button>
+        <div id="userinfo" class="userinfo"></div>
+      </div>
+    </header>
+
+    <main class="container">
+      <aside class="panel sidebar">
+        <h3>Create / Publish Model</h3>
+        <label class="muted">Model JSON (example)</label>
+        <textarea id="modelJson">
+{
+  "name": "Product",
+  "fields": [
+    { "name": "name", "type": "string", "required": true },
+    { "name": "price", "type": "number" },
+    { "name": "ownerId", "type": "string" }
+  ],
+  "ownerField": "ownerId",
+  "rbac": {
+    "Admin": ["all"],
+    "Manager": ["create","read","update"],
+    "Viewer": ["read"]
+  }
+}</textarea
+        >
+        <div class="actions">
+          <button id="publish" class="btn primary">Publish Model</button>
+          <button id="pretty" class="btn">Prettify JSON</button>
+        </div>
+
+        <h4>Available Models</h4>
+        <div id="modelsList" class="modelsList"></div>
+      </aside>
+
+      <section class="panel main" id="modelArea">
+        <div class="placeholder">
+          Select a model to view records and manage data.
+        </div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
